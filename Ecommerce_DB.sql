@@ -5,31 +5,31 @@ use Ecommerce_DB;
 
 drop table if exists `supplier`;
 create Table supplier(supp_id int primary key,
-					  supp_name varchar(50) not null,
+		      supp_name varchar(50) not null,
                       supp_city varchar(50) not null,
                       supp_phone varchar(50) not null);
 
 drop table if exists `customer`;                      
 create table customer(CUS_ID int primary key,
-					  CUS_Name varchar(20) not null,
+		      CUS_Name varchar(20) not null,
                       cus_phone varchar(10) not null,
                       cus_city varchar(30) not null,
                       cus_gender char);
  
 drop table if exists `category`;  
 create table category(cat_id int primary key,
-					  cat_name varchar(20) not null);                      
+		      cat_name varchar(20) not null);                      
                      
 drop table if exists `product`; 					 
 create table product(pro_id int primary key,
-					pro_name varchar(20) default "Dummy",
-                    pro_desc varchar(60),
-                    cat_id int,
-                    Foreign key(cat_id) references category(Cat_id));
+		     pro_name varchar(20) default "Dummy",
+                     pro_desc varchar(60),
+                     cat_id int,
+                     Foreign key(cat_id) references category(Cat_id));
    
 drop table if exists `supplier_pricing`;    
 create table supplier_pricing( pricing_id int primary key,
-						       pro_id int,
+			       pro_id int,
                                supp_id int,
                                supp_price int default 0,
                                foreign key(supp_id) references supplier(supp_id),
@@ -37,16 +37,16 @@ create table supplier_pricing( pricing_id int primary key,
 	
 drop table if exists `order`;	
 create table `order` (ord_id int primary key,
-					  ord_amount int not null,
-					  ord_date date not null,
-					  cus_id int,
-					  pricing_id int,
-					  foreign key (cus_id) references customer(cus_id),
-					  foreign key(pricing_id) references supplier_pricing(pricing_id));
+		      ord_amount int not null,
+		      ord_date date not null,
+		      cus_id int,
+		      pricing_id int,
+		      foreign key (cus_id) references customer(cus_id),
+		      foreign key(pricing_id) references supplier_pricing(pricing_id));
 
 drop table if exists `rating`;
 create table rating(rat_id int primary key,
-					ord_id int,
+		    ord_id int,
                     rat_ratstars int not null,
                     foreign key (ord_id) references `order`(ord_id));
 
